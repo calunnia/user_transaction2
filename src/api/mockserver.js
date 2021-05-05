@@ -22,6 +22,31 @@ let data = [
   }
 ]
 
+let users= [
+  {id: 1, name:"Szilagyi Erika"},
+  {id: 2, name:"Szilagyi Otto"},
+  {id: 3, name:"Szilagyi Viki"},
+  {id: 4, name:"Szilagyi Martin"},
+]
+
+let transactions = [
+  {userId:1, type:'deposit' , ammount:1000},
+  {userId:1, type:'withdraw', ammount:100},
+  {userId:1, type:'deposit', ammount:200},
+  {userId:2, type:'deposit', ammount:1000},
+  {userId:2, type:'withdraw', ammount:300},
+  {userId:2, type:'withdraw', ammount:300},
+  {userId:2, type:'withdraw', ammount:300},
+  {userId:2, type:'withdraw', ammount:300},
+  {userId:3, type:'deposit', ammount:500},
+  {userId:3, type:'withdraw', ammount:300},
+  {userId:3, type:'witdraw', ammount:150},
+  {userId:4, type:'deposit', ammount:500},
+  {userId:4, type:'withdraw', ammount:70},
+  {userId:4, type:'withdraw', ammount:30},
+
+]
+
 export function makeServer({ environment = 'test' } = {}) {
   let server = createServer({
     environment,
@@ -47,6 +72,24 @@ export function makeServer({ environment = 'test' } = {}) {
         })
         return { success: true }
       });
+
+
+      this.get('users', (schema, request) => {
+
+         return users
+      });
+
+      this.get('transactions', (schema, request) => {
+
+        return transactions
+      });
+
+
+      this.get('user', (schema, request) => {
+        const search = request.queryParams.search
+        return users.filter(user => user.name.includes(search))
+      });
+
     },
   });
   return server;
