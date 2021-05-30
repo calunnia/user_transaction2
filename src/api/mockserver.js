@@ -27,6 +27,7 @@ let users= [
   {id: 2, name:"Szilagyi Otto"},
   {id: 3, name:"Szilagyi Viki"},
   {id: 4, name:"Szilagyi Martin"},
+  {id: 4, name:"Balint Erika"},
 ]
 
 let transactions = [
